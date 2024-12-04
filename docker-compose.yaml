@@ -1,0 +1,55 @@
+---
+services:
+  lidarr:
+    container_name: lidarr
+    image: ghcr.io/hotio/lidarr
+    ports:
+      - 8686:8686
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Etc/UTC
+    volumes:
+      - "$(pwd)/lidarr":/config
+      - "$(pwd)/music":/data
+	restart: unless-stopped
+
+  beets:
+    container_name: beets
+    image: lscr.io/linuxserver/beets:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+	  - TZ=Etc/UTC
+    volumes:
+      - "${pwd}/beets":/config
+      - "${pwd}/music":/music
+      - "$(pwd/beets_ingest":/downloads
+    ports:
+      - 8337:8337
+    restart: unless-stopped
+
+  navidrome:
+    container_name: navidrome
+	image: deluan/navidrome:latest
+    user: 1000:1000
+    ports:
+      - 4533:4533
+    restart: unless-stopped
+    volumes:
+      - "$(pwd)/navidrome":/data
+      - "$(pwd)/music":/music:ro
+
+  podgrab:
+    container_name: podgrab
+    image: akhilrex/podgrab
+    environment:
+      - CHECK_FREQUENCY=240
+      - PASSWORD=<your_password>
+	  volumes:
+      - "$(pwd)/podgrab":/config
+      - "$(pwd)/music":/assets
+    ports:
+      - 8181:8080
+    restart: unless-stopped
