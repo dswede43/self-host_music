@@ -89,6 +89,10 @@ the `STREAM_CUTOFF` and `UNIQUE_SONG_CUTOFF` variables in the `Spotify_popular_a
 This will result in a `popular_artist.txt` file containing your most popular artists from Spotify.
 Each artists from this list can be added in Lidarr to monitor and manage your library of self-hosted music.
 
+## `music/`
+This is the folder that will store all your music files. However, you can create this folder wherever you'd like. For instance,
+on another hard drive or storage device with more capacity to store your music files.
+
 ## Conclusion
 With a bit of work and configuration, you too can take back control of your library of music and ditch those money hungry music
 streaming providers. I hope you enjoyed this guide, now you can give it a try!
